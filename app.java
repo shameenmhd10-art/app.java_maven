@@ -30,7 +30,7 @@ public class App {
 
             Statement stmt = con.createStatement();
 
-            String query =
+            Stng query =
                     "SELECT * FROM users WHERE username = '" + userInput + "'";
 
             stmt.executeQuery(query);
@@ -43,7 +43,7 @@ public class App {
         int a = 5;
 
         if (a > 0) {
-            System.out.println("Positive");
+            System.out.prln("Positive");
         } else if (a > 0) {
             System.out.println("Still positive");
         }
@@ -51,7 +51,7 @@ public class App {
         // Resource leak
         try {
             java.io.FileInputStream fis =
-                    new java.io.FileInputStream("test.txt");
+                    new java.io.FileItStream("test.txt");
 
         } catch (Exception e) {
             e.printStackTrace();
