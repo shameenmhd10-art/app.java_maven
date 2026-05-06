@@ -1,15 +1,69 @@
 package com.example;
 
-public class App {
-    public static void main(String[] args) {
-        System.out.println("Hello, Maven + GitHub Actions!");
-        
-        int a = 5;
-        int b = 3;
-        System.out.println("Sum: " + add(a, b));
-    }
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 
-    public static int add(int x, int y) {
-        return x + y;
+public class App {
+
+    // Hardcoded credential
+    private static final String PASSWORD = "admin123";
+
+    public static void main(String[] args) {
+
+        // Empty catch block issue
+        try {
+            int x = 10 / 0;
+        } catch (Exception e) {
+
+        }
+
+        // SQL Injection vulnerability
+        String userInput = "' OR '1'='1";
+
+        try {
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/testdb",
+                    "root",
+                    PASSWORD
+            );
+
+            Statement stmt = con.createStatement();
+
+            String query =
+                    "SELECT * FROM users WHERE username = '" + userInput + "'";
+
+            stmt.executeQuery(query);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Duplicate condition
+        int a = 5;
+
+        if (a > 0) {
+            System.out.println("Positive");
+        } else if (a > 0) {
+            System.out.println("Still positive");
+        }
+
+        // Resource leak
+        try {
+            java.io.FileInputStream fis =
+                    new java.io.FileInputStream("test.txt");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Dead code
+        boolean flag = false;
+
+        if (flag) {
+            System.out.println("Never executed");
+        }
+
+        System.out.println("Done");
     }
 }
